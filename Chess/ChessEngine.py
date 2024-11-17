@@ -69,19 +69,31 @@ class GameState():
     def getPawnMoves(self, row, col, moves):
         if self.whiteToMove: # white pawn moves
             if self.board[row-1][col] == '--':
-                moves.append(Move((row, col), (row-1, col), self.board))
+                moves.append(Move((row, col), (row-1, col), self.board)) # advancing one square
                 if row == 6 and self.board[row-2][col] == "--":
-                    moves.append(Move((row, col), (row-2, col), self.board))
+                    moves.append(Move((row, col), (row-2, col), self.board)) # advancing two squares
 
             if col-1 >= 0: # captures to the left
                 if self.board[row-1][col-1][0] == 'b': # enemy piece to capture
                     moves.append(Move((row,col), (row-1, col-1), self.board))
-            if col+1 <= 7:
+            if col+1 <= len(self.board[0]): # captures to the right
                 if self.board[row-1][col+1][0] == 'b': # enemy piece to capture
                     moves.append(Move((row,col), (row-1, col+1), self.board))
 
         else: # black pawn moves
-            pass
+            if self.board[row+1][col] == '--':
+                moves.append(Move((row, col), (row+1, col), self.board)) # advancing one square
+                if row == 1 and self.board[row+2][col] == "--":
+                    moves.append(Move((row, col), (row+2, col), self.board)) # advancing two squares
+
+            if col-1 >= 0: # captures to the left
+                if self.board[row+1][col-1][0] == 'w': # enemy piece to capture
+                    moves.append(Move((row, col), (row+1, col-1), self.board))
+            if col+1 <= len(self.board[0]): # captures to the right
+                if self.board[row+1][col+1][0] == 'w': # enemy piece to capture
+                    moves.append(Move((row, col), (row+1, col+1), self.board))
+
+        # TODO: pawn promotions
 
 
     '''
