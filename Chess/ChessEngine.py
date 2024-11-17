@@ -73,10 +73,10 @@ class GameState():
                 if row == 6 and self.board[row-2][col] == "--":
                     moves.append(Move((row, col), (row-2, col), self.board)) # advancing two squares
 
-            if col-1 >= 0: # captures to the left
+            elif col-1 >= 0: # captures to the left
                 if self.board[row-1][col-1][0] == 'b': # enemy piece to capture
                     moves.append(Move((row,col), (row-1, col-1), self.board))
-            if col+1 <= len(self.board[0]): # captures to the right
+            elif col+1 <= len(self.board[0]): # captures to the right
                 if self.board[row-1][col+1][0] == 'b': # enemy piece to capture
                     moves.append(Move((row,col), (row-1, col+1), self.board))
 
@@ -86,10 +86,10 @@ class GameState():
                 if row == 1 and self.board[row+2][col] == "--":
                     moves.append(Move((row, col), (row+2, col), self.board)) # advancing two squares
 
-            if col-1 >= 0: # captures to the left
+            elif col-1 >= 0: # captures to the left
                 if self.board[row+1][col-1][0] == 'w': # enemy piece to capture
                     moves.append(Move((row, col), (row+1, col-1), self.board))
-            if col+1 <= len(self.board[0]): # captures to the right
+            elif col+1 <= len(self.board[0]): # captures to the right
                 if self.board[row+1][col+1][0] == 'w': # enemy piece to capture
                     moves.append(Move((row, col), (row+1, col+1), self.board))
 
@@ -166,7 +166,15 @@ class GameState():
     Get all the king moves for the king located at row, col and add these moves to the list
     '''
     def getKingMoves(self, row, col, moves):
-        pass
+        kingMoves = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1) ,(1, 0), (1, 1))
+        allyColor = 'w' if self.whiteToMove else 'b'
+        for i in range(8):
+            endRow = row + kingMoves[i][0]
+            endCol = col + kingMoves[i][1]
+            if 0 <= endRow < 8 and 0 <= endCol < 8:  # on board
+                endPiece = self.board[endRow][endCol]
+                if endPiece[0] != allyColor:
+                    moves.append(Move((row, col), (endRow, endCol), self.board))
 
 
 class Move():
@@ -187,7 +195,7 @@ class Move():
         self.pieceMoved = board[self.startRow][self.startCol]
         self.pieceCaptured = board[self.endRow][self.endCol]
         self.moveID = self.startRow * 1000 + self.startCol * 100 + self.endRow * 100 + self.endCol
-        print(self.moveID)
+        # print(self.moveID)
 
     '''
     Overriding the equals method

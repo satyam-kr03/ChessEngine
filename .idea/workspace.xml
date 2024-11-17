@@ -65,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1731839931842</updated>
-      <workItem from="1731839933359" duration="17562000" />
+      <workItem from="1731839933359" duration="18779000" />
     </task>
     <servers />
   </component>
@@ -73,7 +73,7 @@
     <option name="version" value="3" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Chess$ChessEngine.coverage" NAME="ChessEngine Coverage Results" MODIFIED="1731854109326" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chess" />
-    <SUITE FILE_PATH="coverage/Chess$ChessMain.coverage" NAME="ChessMain Coverage Results" MODIFIED="1731868900068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chess" />
+    <SUITE FILE_PATH="coverage/Chess$ChessEngine.coverage" NAME="ChessEngine Coverage Results" MODIFIED="1731873149812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chess" />
+    <SUITE FILE_PATH="coverage/Chess$ChessMain.coverage" NAME="ChessMain Coverage Results" MODIFIED="1731873447842" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Chess" />
   </component>
 </project>
