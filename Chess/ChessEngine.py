@@ -22,11 +22,58 @@ class GameState():
         self.whiteToMove = True
         self.moveLog = []
 
+    '''
+    Takes a move as a parameter and executes it. This will not work for castling, pawn-promotion and en-passant.
+    '''
     def makeMove(self, move):
         self.board[move.startRow][move.startCol] = "--"
         self.board[move.endRow][move.endCol] = move.pieceMoved
         self.moveLog.append(move) # log the move so we can undo it later
         self.whiteToMove = not self.whiteToMove # swap players
+
+    '''
+    Undo the last move made
+    '''
+    def undoMove(self):
+        if len(self.moveLog) > 0: # make sure there is a move to undo
+            move = self.moveLog.pop()
+            self.board[move.startRow][move.startCol] = move.pieceMoved
+            self.board[move.endRow][move.endCol] = move.pieceCaptured
+            self.whiteToMove = not self.whiteToMove # switch turns back
+
+    '''
+    All moves considering checks
+    '''
+    def getValidMoves(self):
+        return self.getAllPossibleMoves()
+
+    '''
+    All moves without considering checks
+    '''
+    def getAllPossibleMoves(self):
+        moves = [Move((6, 4), (4, 4), self.board)]
+        for row in range(len(self.board)): # number of rows
+            for col in range(len(self.board[row])): # number of columns in given row
+                turn = self.board[row][col][0]
+                if (turn == 'w' and self.whiteToMove) and (turn == 'b' and self.whiteToMove):
+                    piece = self.board[row][col][1]
+                    if piece == 'p':
+                        self.getPawnMoves(row, col, moves)
+                    if piece == 'R':
+                        self.getRookMoves(row, col, moves)
+        return moves
+
+    '''
+    Get all the pawn moves for the pawn located at row, col and add these moves to the list
+    '''
+    def getPawnMoves(self, row, col, moves):
+        pass
+
+    '''
+    Get all the rook moves for the rook located at row, col and add these moves to the list
+    '''
+    def getRookMoves(self, row, col, moves):
+        pass
 
 class Move():
     # maps keys to values
@@ -45,6 +92,16 @@ class Move():
         self.endCol = endSq[1]
         self.pieceMoved = board[self.startRow][self.startCol]
         self.pieceCaptured = board[self.endRow][self.endCol]
+        self.moveID = self.startRow * 1000 + self.startCol * 100 + self.endRow * 100 + self.endCol
+        print(self.moveID)
+
+    '''
+    Overriding the equals method
+    '''
+    def __eq__(self, other):
+        if isinstance(other, Move):
+            return self.moveID == other.moveID
+        return False
 
     def getChessNotation(self):
         # add to make this like real chess notation
