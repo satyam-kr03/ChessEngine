@@ -47,6 +47,7 @@ def main():
                 location = p.mouse.get_pos() # (x,y) location of the mouse
                 col = location[0] // SQ_SIZE
                 row = location[1] // SQ_SIZE
+
                 if sqSelected == (row, col): # the user clicked the same square twice
                     sqSelected = () # deselect
                     playerClicks = [] # clear the player clicks
@@ -54,15 +55,16 @@ def main():
                     sqSelected = (row, col)
                     playerClicks.append(sqSelected) # append for both first and second clicks
 
-                if len(playerClicks) == 2:
+                if len(playerClicks) == 2: # after second click
                     move = ChessEngine.Move(playerClicks[0], playerClicks[1], gs.board)
                     print(move.getChessNotation())
                     if move in validMoves:
                         gs.makeMove(move)
                         moveMade = True
-
-                    sqSelected = () # reset user clicks
-                    playerClicks = []
+                        sqSelected = () # reset user clicks
+                        playerClicks = []
+                    else:
+                        playerClicks = [sqSelected]
 
             # key presses
             elif event.type == p.KEYDOWN:
